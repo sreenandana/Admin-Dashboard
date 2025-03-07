@@ -14,6 +14,7 @@
   <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
   <link rel="stylesheet" href="style.css" />
   <link rel="shortcut icon" href="images/favicon.png" />
@@ -251,17 +252,47 @@
               </div>
             </div>
             <!-----------------------Total sales--------------------------------------------------------->
+            
             <div class="col-md-4 mb-4">
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Total Sales</h5>
                   <div class="custom-legend-container w-75 mx-auto">
-                    <canvas id="sales-chart"></canvas>
+
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                    <canvas id="salesChart"></canvas>
+                  <script>
+                      const ctx = document.getElementById('salesChart').getContext('2d');
+                    
+                      const salesChart = new Chart(ctx, {
+                        type: 'bar', // Change to 'line' or 'pie' if needed
+                        data: {
+                          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Months
+                          datasets: [{
+                            label: 'Total Sales ($)',
+                            data: [5000, 7000, 8000, 6500, 9000, 11000], // Sales data
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)', // Bar color
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2
+                          }]
+                        },
+                        options: {
+                          responsive: true,
+                          scales: {
+                            y: {
+                              beginAtZero: true
+                            }
+                          }
+                        }
+                      });
+                  </script>
+                  
                   </div>
                   <div id="sales-chart-legend" class="legend-right"></div>
                 </div>
               </div>
             </div>
+
             <div class="col-md-3 mb-4">
               <div class="card">
                 <div class="card-body">
@@ -443,111 +474,6 @@
     </div>
 
   </div>
-  
-  <script>
-    var browserTrafficData = {
-      datasets: [{
-        data: [20, 20, 10, 30, 20],
-        backgroundColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(75, 192, 117, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(75, 192, 117, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-      }],
-  
-      labels: [
-        'Firefox',
-        'Safari',
-        'Explorer',
-        'Chrome',
-        'Opera Mini'
-      ]
-    };
-    var multiAreaData = {
-      labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-      datasets: [{
-          label: 'Facebook',
-          data: [8, 11, 13, 15, 12, 13, 16, 15, 13, 19, 11, 14],
-          borderColor: ['rgba(255, 99, 132, 0.5)'],
-          backgroundColor: ['rgba(255, 99, 132, 0.5)'],
-          borderWidth: 1,
-          fill: true
-        },
-        {
-          label: 'Twitter',
-          data: [7, 17, 12, 16, 14, 18, 16, 12, 15, 11, 13, 9],
-          borderColor: ['rgba(54, 162, 235, 0.5)'],
-          backgroundColor: ['rgba(54, 162, 235, 0.5)'],
-          borderWidth: 1,
-          fill: true
-        },
-        {
-          label: 'Linkedin',
-          data: [6, 14, 16, 20, 12, 18, 15, 12, 17, 19, 15, 11],
-          borderColor: ['rgba(255, 206, 86, 0.5)'],
-          backgroundColor: ['rgba(255, 206, 86, 0.5)'],
-          borderWidth: 1,
-          fill: true
-        }
-      ]
-    };
-  
-    var multiAreaOptions = {
-      plugins: {
-        filler: {
-          propagate: true
-        }
-      },
-      elements: {
-        point: {
-          radius: 0
-        }
-      },
-      scales: {
-        xAxes: [{
-          gridLines: {
-            display: false
-          }
-        }],
-        yAxes: [{
-          gridLines: {
-            display: false
-          }
-        }]
-      }
-    }
-  
-    if ($("#browserTrafficChart").length) {
-      var doughnutChartCanvas = $("#browserTrafficChart").get(0).getContext("2d");
-      var doughnutChart = new Chart(doughnutChartCanvas, {
-        type: 'doughnut',
-        data: browserTrafficData,
-        options: doughnutPieOptions
-      });
-    }
-  
-    if ($("#areachart-multi").length) {
-      var multiAreaCanvas = $("#areachart-multi").get(0).getContext("2d");
-      var multiAreaChart = new Chart(multiAreaCanvas, {
-        type: 'line',
-        data: multiAreaData,
-        options: multiAreaOptions
-      });
-    }
-  
-    // Dashboard Chart
-  </script>
 
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
