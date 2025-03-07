@@ -162,7 +162,7 @@
               </div>
             </div>
           </div>
-        <!---------------------------Bar chart---------------------------------------->
+        <!---------------------------Scatter chart---------------------------------------->
         <div class="col-lg-6 col-12 mb-4">
             <div class="card">
               <div class="card-body">
@@ -294,55 +294,57 @@
      </div>
      </div>
     </div>
-            <!---------------------------Doughnut chart---------------------------------------->
-            <div class="col-lg-6 col-12 mb-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title mb-4">Doughnut chart</h5>
-                  <canvas id="doughnutChart"></canvas>
-                  <style>
-                    body {
-                        text-align: center;
-                        font-family: Arial, sans-serif;
-                    }
-                    canvas {
-                        max-width: 400px;
-                        max-height: 250px;
-                        margin: 20px auto;
-                    }
-                </style>
-            
-                <script>
-                    const ctx = document.getElementById('doughnutChart').getContext('2d');
-            
-                    const salesData = {
-                        labels: ['Electronics', 'Clothing', 'Groceries', 'Accessories', 'Others'],
-                        datasets: [{
-                            data: [300, 150, 100, 200, 80],  // Sales figures
-                            backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff'],
-                            hoverOffset: 10
-                        }]
-                    };
-            
-                    const config = {
-                        type: 'doughnut',
-                        data: salesData,
-                        options: {
-                            responsive: true,
-                            plugins: {
-                                legend: {
-                                    position: 'bottom'
-                                }
-                            }
-                        }
-                    };
-            
-                    new Chart(ctx, config);
-                </script>
-                </div>
+        <!---------------------------Doughnut chart---------------------------------------->
+        <div class="col-lg-6 col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-4">Doughnut chart</h5>
+              <style>
+                body {
+                    text-align: center;
+                    font-family: Arial, sans-serif;
+                }
+                .chart-container {
+                    display: flex;
+                    justify-content: center;
+                    gap: 50px;
+                    margin-top: 50px;
+                }
+                canvas {
+                    width: 300px !important;
+                    height: 300px !important;
+                }
+              </style>
+
+              <div class="chart-container">
+               <div>
+                <h3>Product Sales</h3>
+                <canvas id="salesChart1"></canvas>
+               </div>
               </div>
-            </div>
+
+            <script>
+                // Sales data for Product A
+                var ctx1 = document.getElementById('salesChart1').getContext('2d');
+                var salesChart1 = new Chart(ctx1, {
+                type: 'doughnut',
+                data: {
+                labels: ['Online', 'Retail', 'Wholesale'],
+                datasets: [{
+                data: [40, 35, 25], // Sales distribution
+                backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56']
+              }]
+              },
+              options: {
+               responsive: true,
+              maintainAspectRatio: false
+              }
+             });
+            </script>
+           </div>
+           </div>
           </div>
+        </div>
     <!---------------------------Pie chart---------------------------------------->
     <div class="row">
       <div class="col-lg-6 col-12 mb-4">
@@ -350,80 +352,62 @@
           <div class="card-body">
               <h5 class="card-title mb-4">Pie chart</h5>
               <canvas id="pieChart"></canvas>
-            <style>
-                body {
-                 text-align: center;
-                 font-family: Arial, sans-serif;
-              }
-                canvas {
-                max-width: 500px;
-                max-height: 250px;
-                margin: auto;
-              }
-            </style>
-
-      <script>
+        <script>
         // Sample sales data
-        const salesData = {
-            labels: ["Product A", "Product B", "Product C", "Product D"],
-            datasets: [{
-                data: [300, 150, 200, 100], // Sales values
-                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50"]
-            }]
-        };
-
-        // Get the canvas element
-        const ctx = document.getElementById('pieChart').getContext('2d');
-
-        // Create the pie chart
-        new Chart(ctx, {
+        const ctx2 = document.getElementById('pieChart').getContext('2d');
+        new Chart(ctx2, {
             type: 'pie',
-            data: salesData,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
+            data: {
+                labels: ['Online Sales', 'In-Store Sales'],
+                datasets: [{
+                    data: [60, 40], // Example data
+                    backgroundColor: ['orange', 'purple']
+                }]
             }
-        });
-      </script>
+          });
+        </script>
       </div>
       </div>
     </div>
-      <!---------------------------Scatter chart---------------------------------------->
+    <!---------------------------Bar chart---------------------------------------->
       <div class="col-lg-6 col-12 mb-4">
         <div class="card">
          <div class="card-body">
           <h5 class="card-title mb-4">Bar chart</h5>
-                <canvas id="barChart"></canvas>
+          <canvas id="barChart"></canvas>
                   
-                <script>
-                    const ctx = document.getElementById('barChart').getContext('2d');
-                  
-                    const salesChart = new Chart(ctx, {
-                      type: 'bar', // Change to 'line' or 'pie' if needed
-                      data: {
-                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Months
-                        datasets: [{
-                          label: 'Total Sales ($)',
-                          data: [5000, 7000, 8000, 6500, 9000, 11000], // Sales data
-                          backgroundColor: 'rgba(75, 192, 192, 0.5)', // Bar color
-                          borderColor: 'rgba(75, 192, 192, 1)',
-                          borderWidth: 2
-                        }]
-                      },
-                      options: {
-                        responsive: true,
-                        scales: {
-                          y: {
+          <script>
+            // Sample Sales Data
+            const salesData = {
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+                datasets: [{
+                    label: "Total Sales ($)",
+                    data: [1200, 1900, 3000, 5000, 2400, 3200], // Sales values
+                    backgroundColor: "rgba(54, 162, 235, 0.6)", // Bar color
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    borderWidth: 1
+                }]
+            };
+    
+            // Chart Configuration
+            const config = {
+                type: "bar",
+                data: salesData,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
                             beginAtZero: true
-                          }
                         }
-                      }
-                    });
-                </script>
+                    }
+                }
+            };
+    
+            // Render Chart
+            const ctx = document.getElementById("barChart").getContext("2d");
+            new Chart(ctx, config);
+        </script>
+
          </div>
         </div>
         </div>
@@ -437,7 +421,7 @@
             </span>
           </div>
         </footer>
-        <!-- partial -->
+    <!-- partial -->
     </div>
     </div>
   </div>
@@ -449,5 +433,4 @@
   <script src="../../node_modules/chart.js/dist/Chart.min.js"></script>
  
 </body>
-
 </html>
