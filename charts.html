@@ -117,68 +117,319 @@
           </ul>
         </nav>
 
-        <!-- partial -->
-        <div class="content-wrapper">
-          <h3 class="page-heading mb-4">Charts</h3>
-          <div class="row">
-            <div class="col-lg-6 col-12 mb-4">
-              <div class="card">
-                <div class="card-body">
+      <!-- partial -->
+      <div class="content-wrapper">
+        <h3 class="page-heading mb-4">Charts</h3>
+        <div class="row">
+          <div class="col-lg-6 col-12 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <!---------------------------Line chart---------------------------------------->
                   <h5 class="card-title mb-4">Line chart</h5>
-                  <canvas id="lineChart" style="height:250px"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-12 mb-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title mb-4">Bar chart</h5>
-                  <canvas id="barChart" style="height:230px"></canvas>
-                </div>
+                  <canvas id="lineChart"></canvas> 
+                  <script>
+                      // Get the canvas element
+                      var ctx = document.getElementById("lineChart").getContext("2d");
+              
+                      // Sales data
+                      var salesData = {
+                          labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"], // Months
+                          datasets: [{
+                              label: "Total Sales ($)",
+                              data: [5000, 7000, 8000, 12000, 15000, 20000], // Sales numbers
+                              borderColor: "blue",
+                              backgroundColor: "rgba(0, 0, 255, 0.1)",
+                              borderWidth: 2,
+                              tension: 0.3 // Smooth curve
+                          }]
+                      };
+              
+                      // Chart configuration
+                      var config = {
+                          type: "line",
+                          data: salesData,
+                          options: {
+                              responsive: true,
+                              scales: {
+                                  y: { beginAtZero: true }
+                              }
+                          }
+                      };
+              
+                      // Create the chart
+                      new Chart(ctx, config);
+                  </script>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-lg-6 col-12 mb-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title mb-4">Area chart</h5>
-                  <canvas id="areaChart" style="height:250px"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-12 mb-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title mb-4">Doughnut chart</h5>
-                  <canvas id="doughnutChart" style="height:250px"></canvas>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-6 col-12 mb-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title mb-4">Pie chart</h5>
-                  <canvas id="pieChart" style="height:250px"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-6 col-12 mb-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title mb-4">Scatter chart</h5>
-                  <canvas id="scatterChart" style="height:250px"></canvas>
-                </div>
+        <!---------------------------Bar chart---------------------------------------->
+        <div class="col-lg-6 col-12 mb-4">
+            <div class="card">
+              <div class="card-body">
+              <h5 class="card-title mb-4">Scatter chart</h5>
+            <canvas id="scatterChart" width="400" height="200"></canvas>
+          <script>
+             // Get the canvas element
+             var ctx = document.getElementById('scatterChart').getContext('2d');
+
+            // Sales data (Example: X = Days, Y = Total Sales in $)
+            var salesData = {
+            datasets: [{
+                label: 'Sales Performance',
+                data: [
+                    {x: 1, y: 500},  // Day 1, $500
+                    {x: 2, y: 700},  // Day 2, $700
+                    {x: 3, y: 1200}, // Day 3, $1200
+                    {x: 4, y: 1800}, // Day 4, $1800
+                    {x: 5, y: 2200}, // Day 5, $2200
+                ],
+                backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                borderColor: 'rgba(0, 123, 255, 1)',
+                borderWidth: 1,
+                pointRadius: 6
+            }]
+           };
+ 
+           // Chart configuration
+           var config = {
+            type: 'scatter',
+            data: salesData,
+            options: {
+                scales: {
+                    x: {
+                        type: 'linear',
+                        position: 'bottom',
+                        title: {
+                            display: true,
+                            text: 'Day'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Total Sales ($)'
+                        }
+                    }
+                }
+              }
+            };
+
+            // Create the scatter chart
+            new Chart(ctx, config);
+          </script>
+                
               </div>
             </div>
           </div>
         </div>
+        <!---------------------------Area chart---------------------------------------->
+    <div class="row">
+        <div class="col-lg-6 col-12 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title mb-4">Area chart</h5>
+              <canvas id="salesChart"></canvas>
+              <style>
+                    body {
+                        font-family: Arial, sans-serif;
+                        text-align: center;
+                    }
+                    canvas {
+                        max-width: 600px;
+                        max-height: 250px;
+                        margin: auto;
+                    }
+              </style>
+      <script>
+        // Get the canvas element
+        var ctx = document.getElementById("salesChart").getContext("2d");
+
+        // Data for the chart
+        var salesData = {
+            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"], // Months
+            datasets: [{
+                label: "Total Sales ($)",
+                data: [5000, 7000, 9000, 12000, 15000, 17000], // Sales Data
+                backgroundColor: "rgba(54, 162, 235, 0.2)", // Light blue fill
+                borderColor: "rgba(54, 162, 235, 1)", // Blue border
+                borderWidth: 2,
+                fill: true, // Fill the area under the line
+                tension: 0.4 // Smooth curve effect
+            }]
+        };
+
+        // Chart configuration
+        var config = {
+            type: "line", // Chart type
+            data: salesData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Months"
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: "Sales ($)"
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Create the chart
+        new Chart(ctx, config);
+      </script>
+     </div>
+     </div>
+    </div>
+            <!---------------------------Doughnut chart---------------------------------------->
+            <div class="col-lg-6 col-12 mb-4">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title mb-4">Doughnut chart</h5>
+                  <canvas id="doughnutChart"></canvas>
+                  <style>
+                    body {
+                        text-align: center;
+                        font-family: Arial, sans-serif;
+                    }
+                    canvas {
+                        max-width: 400px;
+                        max-height: 250px;
+                        margin: 20px auto;
+                    }
+                </style>
+            
+                <script>
+                    const ctx = document.getElementById('doughnutChart').getContext('2d');
+            
+                    const salesData = {
+                        labels: ['Electronics', 'Clothing', 'Groceries', 'Accessories', 'Others'],
+                        datasets: [{
+                            data: [300, 150, 100, 200, 80],  // Sales figures
+                            backgroundColor: ['#ff6384', '#36a2eb', '#ffcd56', '#4bc0c0', '#9966ff'],
+                            hoverOffset: 10
+                        }]
+                    };
+            
+                    const config = {
+                        type: 'doughnut',
+                        data: salesData,
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'bottom'
+                                }
+                            }
+                        }
+                    };
+            
+                    new Chart(ctx, config);
+                </script>
+                </div>
+              </div>
+            </div>
+          </div>
+    <!---------------------------Pie chart---------------------------------------->
+    <div class="row">
+      <div class="col-lg-6 col-12 mb-4">
+        <div class="card">
+          <div class="card-body">
+              <h5 class="card-title mb-4">Pie chart</h5>
+              <canvas id="pieChart"></canvas>
+            <style>
+                body {
+                 text-align: center;
+                 font-family: Arial, sans-serif;
+              }
+                canvas {
+                max-width: 500px;
+                max-height: 250px;
+                margin: auto;
+              }
+            </style>
+
+      <script>
+        // Sample sales data
+        const salesData = {
+            labels: ["Product A", "Product B", "Product C", "Product D"],
+            datasets: [{
+                data: [300, 150, 200, 100], // Sales values
+                backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50"]
+            }]
+        };
+
+        // Get the canvas element
+        const ctx = document.getElementById('pieChart').getContext('2d');
+
+        // Create the pie chart
+        new Chart(ctx, {
+            type: 'pie',
+            data: salesData,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+      </script>
+      </div>
+      </div>
+    </div>
+      <!---------------------------Scatter chart---------------------------------------->
+      <div class="col-lg-6 col-12 mb-4">
+        <div class="card">
+         <div class="card-body">
+          <h5 class="card-title mb-4">Bar chart</h5>
+                <canvas id="barChart"></canvas>
+                  
+                <script>
+                    const ctx = document.getElementById('barChart').getContext('2d');
+                  
+                    const salesChart = new Chart(ctx, {
+                      type: 'bar', // Change to 'line' or 'pie' if needed
+                      data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], // Months
+                        datasets: [{
+                          label: 'Total Sales ($)',
+                          data: [5000, 7000, 8000, 6500, 9000, 11000], // Sales data
+                          backgroundColor: 'rgba(75, 192, 192, 0.5)', // Bar color
+                          borderColor: 'rgba(75, 192, 192, 1)',
+                          borderWidth: 2
+                        }]
+                      },
+                      options: {
+                        responsive: true,
+                        scales: {
+                          y: {
+                            beginAtZero: true
+                          }
+                        }
+                      }
+                    });
+                </script>
+         </div>
+        </div>
+        </div>
+        </div>
+      </div>
         <!-- partial:../../partials/_footer.html -->
-
-        
-
         <footer class="footer">
           <div class="container-fluid clearfix">
             <span class="float-right">
@@ -186,14 +437,9 @@
             </span>
           </div>
         </footer>
-
-
-        
-
         <!-- partial -->
-      </div>
     </div>
-
+    </div>
   </div>
 
   <script src="../../node_modules/jquery/dist/jquery.min.js"></script>
